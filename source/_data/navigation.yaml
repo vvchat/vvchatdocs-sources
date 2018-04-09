@@ -1,0 +1,64 @@
+{
+  "logo": {
+    "text": "VVChat开放平台",
+    "type": "link",
+    "path": "index.html"
+  },
+  "main": [{
+    "text": "H5应用",
+    "type": "label",
+    "children": [{
+      "text": "IM内H5",
+      "type": "link",
+      "path": "h5/imh5.html"
+    },{
+      "text": "手机H5",
+      "type": "link",
+      "path": "h5/h5.html"
+    },
+    {
+      "text": "JSSDK文档",
+      "type": "link",
+      "path": "jssdk/jssdk.html"
+    }]
+  },
+  {
+    "text": "移动APP",
+    "type": "label",
+    "children": [{
+      "text": "用户信息授权",
+      "type": "link",
+      "path": "appsdk/auth.html"
+    },{
+      "text": "APP支付",
+      "type": "link",
+      "path": "appsdk/pay.html"
+    },{
+      "text": "客服",
+      "type": "link",
+      "path": "appsdk/service.html"
+    }]
+  },
+  {
+    "text": "服务端",
+    "type": "label",
+    "children":[
+      {
+        "text": "API",
+        "type": "link",
+        "path": "publicapi/index.html"
+      }
+    ]
+  },
+  {
+    "text": "资源下载",
+    "type": "label",
+    "children":[
+      {
+        "text": "资源",
+        "type": "link",
+        "path": "resources/resource.html"
+      }
+    ]
+  }]
+}

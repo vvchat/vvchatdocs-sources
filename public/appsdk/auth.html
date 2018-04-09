@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>企云信开放平台 |  </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,600,700" rel="stylesheet">
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/style/doc.css">
+
+    <!-- favicon -->
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+  </head>
+  <body>
+
+   <script>window.__INITIAL_STATE__ = {"page":{"path":"appsdk/auth.html","title":""},"data":{"navigation":{"logo":{"text":"企云信开放平台","type":"link","path":"index.html"},"main":[{"text":"H5应用","type":"label","children":[{"text":"IM内H5","type":"link","path":"h5/imh5.html"},{"text":"手机H5","type":"link","path":"h5/h5.html"},{"text":"JSSDK文档","type":"link","path":"jssdk/jssdk.html"}]},{"text":"移动APP","type":"label","children":[{"text":"用户信息授权","type":"link","path":"appsdk/auth.html"},{"text":"APP支付","type":"link","path":"appsdk/pay.html"},{"text":"客服","type":"link","path":"appsdk/service.html"}]},{"text":"服务端","type":"label","children":[{"text":"API","type":"link","path":"publicapi/index.html"}]},{"text":"资源下载","type":"label","children":[{"text":"资源","type":"link","path":"resources/resource.html"}]}]}},"config":{"timezone":null,"root":"/","time_format":"HH:mm:ss","theme":"../node_modules/hexo-theme-doc","theme_config":{"swagger_ui":{"version":2,"permalinks":true,"api_explorer":true,"download":"Download specification","show_extensions":false,"deep_linking":true,"display_operation_id":false,"doc_expansion":"none"},"search":{"skip":false,"background":false,"route":"/lunr.json"},"favicon":"/favicon.ico"}}}</script>
+
+    <div id="react-navigation-root"><div class="doc-navigation" data-reactroot=""><nav class="doc-navbar"><a href="/index.html" class="doc-navbar__logo"><img src="/images/logo.png" class="doc-navbar__logo__img"/><span class="doc-navbar__logo__text">企云信开放平台</span></a><i class="dc-icon dc-icon--close dc-icon--interactive doc-sidebar-close doc-navbar__sidebar-close doc-navbar__sidebar-close--desktop"></i><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-navbar__sidebar-toggle"></i></nav><nav class="doc-sidebar"><div class="doc-sidebar__vertical-menu"><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-sidebar-toggle--primary doc-sidebar__vertical-menu__item"></i><i class="dc-icon dc-icon--search dc-icon--interactive doc-sidebar__vertical-menu__item doc-sidebar__vertical-menu__item--primary"></i></div><div class="doc-sidebar-content"><div class="doc-sidebar__search-form"></div><ul class="doc-sidebar-list"></ul></div></nav></div></div>
+    <div class="doc-content">
+  <div class="dc-page">
+    <div class="dc-card">
+      <div id="react-search-results-root"></div>
+      <div id="page-content" class="doc-formatting">
+        <h3 id="用户信息授权"><a href="#用户信息授权" class="headerlink" title="用户信息授权"></a>用户信息授权</h3><h4 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h4><p>移动应用<strong>企云信</strong>登录是基于<a href="http://oauth.net/2/" target="_blank" rel="noopener">OAuth2.0协议标准</a>构建的OAuth2.0授权登录系统。</p>
+<p>在进行<strong>企云信</strong> OAuth2.0授权登录接入之前，在企云信开放平台注册开发者帐号，并拥有一个已审核通过的移动应用，并获得相应的AppID和AppKey，申请企云信登录且通过审核后，可开始接入流程。</p>
+<h4 id="授权流程说明"><a href="#授权流程说明" class="headerlink" title="授权流程说明"></a>授权流程说明</h4><p>授权流程分三步：</p>
+<ol>
+<li><p>第三方发起<strong>企云信</strong>授权登录请求，<strong>企云信</strong>用户允许授权第三方应用后，<strong>企云信</strong>会拉起应用，并且带上授权临时票据code参数；</p>
+</li>
+<li><p>通过code参数加上AppID和AppKey等，通过API换取访问token；</p>
+</li>
+<li><p>通过token进行接口调用，获取用户基本数据资源或帮助用户实现基本操作。（根据scope的不同可以获取到不同的权限。）</p>
+</li>
+</ol>
+<h5 id="第一步：请求CODE"><a href="#第一步：请求CODE" class="headerlink" title="第一步：请求CODE"></a>第一步：请求CODE</h5><p>开发者需要配合使用<strong>企云信</strong>开放平台提供的SDK进行授权登录请求接入。正确接入SDK后并拥有相关授权域（scope，</p>
+<p>）权限后，开发者移动应用会在终端本地拉起<strong>企云信</strong>应用进行授权登录，<strong>企云信</strong>用户确认后<strong>企云信</strong>将拉起开发者移动应用，并带上授权临时票据（code）。</p>
+<p>Android平台应用授权登录接入代码示例（请参考Android接入指南）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 构建登录请求对象</span><br><span class="line">LoginRequest loginRequest = new LoginRequest();</span><br><span class="line">loginRequest.setAppId(appId);</span><br><span class="line">loginRequest.setScope(&quot;snsapi_userinfo&quot;);</span><br><span class="line">loginRequest.setState(&quot;test&quot;);</span><br><span class="line">// 发起登录请求</span><br><span class="line">SDKUtils.SendRequest(loginRequest, context);</span><br></pre></td></tr></table></figure>
+<h5 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h5><table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">是否必须</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">应用唯一ID，<strong>企云信</strong>开发平台下发</td>
+</tr>
+<tr>
+<td style="text-align:left">scope</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">应用授权域，获取个人信息填写 snsapi_userinfo</td>
+</tr>
+<tr>
+<td style="text-align:left">state</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">用于保持请求与回调的状态，将原样返回第三方，该参数可以防止csrf攻击</td>
+</tr>
+</tbody>
+</table>
+<p><strong>可拉起企云信打开授权登录页：</strong></p>
+<p><img src="/images/Screenshot_2018-01-04-20-40-13.png" alt=""></p>
+<p>用户点击授权后，<strong>企云信</strong>客户端会被拉起，跳转至授权界面，用户在该界面点击允许或取消，SDK将授权code传递给调用方。</p>
+<h5 id="返回说明"><a href="#返回说明" class="headerlink" title="返回说明"></a>返回说明</h5><table>
+<thead>
+<tr>
+<th style="text-align:left">返回值</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">err_code</td>
+<td style="text-align:left">0：用户同意  ，其他代号都表示错误</td>
+</tr>
+<tr>
+<td style="text-align:left">code</td>
+<td style="text-align:left">授权code，用来后续换取token用</td>
+</tr>
+<tr>
+<td style="text-align:left">state</td>
+<td style="text-align:left">第三方传入的安全状态码</td>
+</tr>
+</tbody>
+</table>
+<h5 id="第二步：通过code获取token"><a href="#第二步：通过code获取token" class="headerlink" title="第二步：通过code获取token"></a>第二步：通过code获取token</h5><p>获取第一步的code后，请求以下链接获取token：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://www.xxxxxxx.com/userservices/v2/authorization/token?app_id=APPID&amp;app_key=APPKEY&amp;code=CODE</span><br></pre></td></tr></table></figure>
+<h5 id="参数说明-1"><a href="#参数说明-1" class="headerlink" title="参数说明"></a>参数说明</h5><table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">是否必须</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">应用唯一标识</td>
+</tr>
+<tr>
+<td style="text-align:left">app_key</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">应用密钥</td>
+</tr>
+<tr>
+<td style="text-align:left">code</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">授权code</td>
+</tr>
+</tbody>
+</table>
+<p>返回说明</p>
+<p>正确的返回：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">&quot;open_id&quot;:&quot;OPENID&quot;,  </span><br><span class="line">&quot;scope&quot;:&quot;SCOPE&quot;,</span><br><span class="line">&quot;token&quot;:&quot;TOKEN&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">open_id</td>
+<td style="text-align:left">授权用户唯一标识</td>
+</tr>
+<tr>
+<td style="text-align:left">scope</td>
+<td style="text-align:left">授权作用域</td>
+</tr>
+<tr>
+<td style="text-align:left">token</td>
+<td style="text-align:left">接口调用凭证</td>
+</tr>
+</tbody>
+</table>
+<p><strong>错误返回样例（http状态码为400）：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&quot;err_code&quot;:400,&quot;err_msg&quot;:&quot;无效的code&quot;&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="第三步：通过access-token调用接口"><a href="#第三步：通过access-token调用接口" class="headerlink" title="第三步：通过access_token调用接口"></a>第三步：通过access_token调用接口</h5><h5 id="获取用户个人信息"><a href="#获取用户个人信息" class="headerlink" title="获取用户个人信息"></a>获取用户个人信息</h5><h6 id="请求说明"><a href="#请求说明" class="headerlink" title="请求说明"></a>请求说明</h6><p>http请求方式: GET</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https://xxxx//userservices/v2/authorization/userinfo</span><br><span class="line"></span><br><span class="line">请求头：</span><br><span class="line">Authorization: TOEKN</span><br></pre></td></tr></table></figure>
+<h5 id="返回说明-1"><a href="#返回说明-1" class="headerlink" title="返回说明"></a>返回说明</h5><table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">open_id</td>
+<td style="text-align:left">用户open_id, 唯一标识</td>
+</tr>
+<tr>
+<td style="text-align:left">nickname</td>
+<td style="text-align:left">用户昵称</td>
+</tr>
+<tr>
+<td style="text-align:left">sex</td>
+<td style="text-align:left">用户性别  女  男</td>
+</tr>
+</tbody>
+</table>
+
+        <div id="react-support-footer-root"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+    
+
+    <!-- js vendors -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/2.1.0/lunr.min.js"></script>
+
+    <!-- js source  -->
+    <script src="/script/doc.js"></script>
+
+    
+
+  </body>
+</html>

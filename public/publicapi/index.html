@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>企云信开放平台 | 企云信文档 </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,600,700" rel="stylesheet">
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/style/doc.css">
+
+    <!-- favicon -->
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+  </head>
+  <body>
+
+   <script>window.__INITIAL_STATE__ = {"page":{"title":"企云信文档","path":"publicapi/index.html"},"data":{"navigation":{"logo":{"text":"企云信开放平台","type":"link","path":"index.html"},"main":[{"text":"H5应用","type":"label","children":[{"text":"IM内H5","type":"link","path":"h5/imh5.html"},{"text":"手机H5","type":"link","path":"h5/h5.html"},{"text":"JSSDK文档","type":"link","path":"jssdk/jssdk.html"}]},{"text":"移动APP","type":"label","children":[{"text":"用户信息授权","type":"link","path":"appsdk/auth.html"},{"text":"APP支付","type":"link","path":"appsdk/pay.html"},{"text":"客服","type":"link","path":"appsdk/service.html"}]},{"text":"服务端","type":"label","children":[{"text":"API","type":"link","path":"publicapi/index.html"}]},{"text":"资源下载","type":"label","children":[{"text":"资源","type":"link","path":"resources/resource.html"}]}]}},"config":{"timezone":null,"root":"/","time_format":"HH:mm:ss","theme":"../node_modules/hexo-theme-doc","theme_config":{"swagger_ui":{"version":2,"permalinks":true,"api_explorer":true,"download":"Download specification","show_extensions":false,"deep_linking":true,"display_operation_id":false,"doc_expansion":"none"},"search":{"skip":false,"background":false,"route":"/lunr.json"},"favicon":"/favicon.ico"}}}</script>
+
+    <div id="react-navigation-root"><div class="doc-navigation" data-reactroot=""><nav class="doc-navbar"><a href="/index.html" class="doc-navbar__logo"><img src="/images/logo.png" class="doc-navbar__logo__img"/><span class="doc-navbar__logo__text">企云信开放平台</span></a><i class="dc-icon dc-icon--close dc-icon--interactive doc-sidebar-close doc-navbar__sidebar-close doc-navbar__sidebar-close--desktop"></i><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-navbar__sidebar-toggle"></i></nav><nav class="doc-sidebar"><div class="doc-sidebar__vertical-menu"><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-sidebar-toggle--primary doc-sidebar__vertical-menu__item"></i><i class="dc-icon dc-icon--search dc-icon--interactive doc-sidebar__vertical-menu__item doc-sidebar__vertical-menu__item--primary"></i></div><div class="doc-sidebar-content"><div class="doc-sidebar__search-form"></div><ul class="doc-sidebar-list"></ul></div></nav></div></div>
+    <div class="doc-content">
+  <div class="dc-page">
+    <div class="dc-card">
+      <div id="react-search-results-root"></div>
+      <div id="page-content" class="doc-formatting">
+        <h2 id="签名通用规则"><a href="#签名通用规则" class="headerlink" title="签名通用规则"></a>签名通用规则</h2><p><strong>企云信</strong>签名生成的通用步骤如下：</p>
+<p>第一步，设所有发送或者接收到的数据为集合M，将集合M内非空参数值的参数按照参数名ASCII码从小到大排序（字典序），使用URL键值对的格式（即key1=value1&amp;key2=value2…）拼接成字符串stringA。</p>
+<p>特别注意以下重要规则：</p>
+<ol>
+<li>◆ 参数名ASCII码从小到大排序（字典序）；</li>
+<li>◆ 如果参数的值为空不参与签名；</li>
+<li>◆ 参数名区分大小写；</li>
+<li>◆ 验证调用返回或<strong>企云信</strong>主动通知签名时，传送的sign参数不参与签名，将生成的签名与该sign值作校验。</li>
+<li>◆ 支付接口可能增加字段，验证签名时必须支持增加的扩展字段</li>
+</ol>
+<p>第二步，在stringA最后拼接上key得到stringSignTemp字符串，并对stringSignTemp进行MD5运算，再将得到的字符串所有字符转换为大写，得到sign值signValue。</p>
+<p>举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">假设传送的参数如下：</span><br><span class="line">app_id： qyxd930ea5d5a258f4f</span><br><span class="line">store_no： 10000100</span><br><span class="line">title： test</span><br><span class="line">amount： 1</span><br><span class="line">nonce_str： ibuaiVcKdpRxkhJA</span><br></pre></td></tr></table></figure>
+<p>第一步：对参数按照key=value的格式，并按照参数名ASCII字典序排序如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stringA=&quot;amount=1&amp;app_id=qyxd930ea5d5a258f4f&amp;nonce_str=ibuaiVcKdpRxkhJA&amp;store_no=10000100</span><br><span class="line">&amp;title=test;</span><br></pre></td></tr></table></figure>
+<p>第二步：拼接API密钥：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stringSignTemp=stringA+&quot;&amp;key=192006250b4c09247ec02edce69f6a2d&quot; //注：key为平台下发的</span><br><span class="line">sign=MD5(stringSignTemp).toUpperCase()=&quot;9A0A8659F005D6984697E2CA0A9CF3B7&quot; //注：MD5签名方式</span><br></pre></td></tr></table></figure>
+<p>##基础签名</p>
+<p>基础签名规则与通用签名规则一样。签名的数据为公共数据，将接口header里的公用参数进行<strong>通用签名</strong></p>
+<p><strong><em>一般安全级别的接口，可能只需要基础签名即可。</em></strong></p>
+<h4 id="公共参数如下："><a href="#公共参数如下：" class="headerlink" title="公共参数如下："></a>公共参数如下：</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">变量名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">应用ID</td>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">应用ID由平台下发</td>
+</tr>
+<tr>
+<td style="text-align:left">随机码</td>
+<td style="text-align:left">noncestr</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">随机字符串码</td>
+</tr>
+<tr>
+<td style="text-align:left">时间戳</td>
+<td style="text-align:left">timestamp</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">时间戳 10位 到秒</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">signString=&quot;app_id=test&amp;noncestr=k9d7fgj23&amp;timestamp=1522821617&amp;key=XXXXXX&quot;</span><br><span class="line">sign=MD5(signString).toUpperCase()=&quot;9A0A8659F005D6984697E2CA0A9CF3B7&quot; //注：MD5签名方式</span><br></pre></td></tr></table></figure>
+<h2 id="数据签名"><a href="#数据签名" class="headerlink" title="数据签名"></a>数据签名</h2><p><strong><em>安全级别中等的接口，需要基础签名即可。</em></strong></p>
+<p>数据签名规则与通用签名规则一致,签名的数据为接口返回请求数据（回调接口返回数据）</p>
+<h2 id="联合签名"><a href="#联合签名" class="headerlink" title="联合签名"></a>联合签名</h2><p><strong><em>安全级别要求高的接口，需要进行联合签名。</em></strong></p>
+<p>联合签名是数据签名+基础签名进行混合签名。</p>
+<p>第一步：进行数据签名的时候需要将基础签名加到签名数据尾部：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dataAndBaseSign = MD5 (stringA+&quot;&amp;key=192006250b4c09247ec02edce69f6a2d&quot;+&quot;&amp;basesign=dgce5thdy8t3t6hk89grd3d5&quot;).toUpperCase()</span><br><span class="line">//注：key为平台下发的</span><br><span class="line">// basesign 为基础数据签名所得</span><br></pre></td></tr></table></figure>
+<p>第二步：联合签名（基础签名+数据基础混合签名）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sign = basesign+&quot;.&quot; + dataAndBaseSign  //基础签名 + &quot;.&quot; + 数据基础混合签名</span><br><span class="line">// 注意中间需要用“.”隔开</span><br></pre></td></tr></table></figure>
+<h3 id="举例说明-（以此例子所示签名方式为准）"><a href="#举例说明-（以此例子所示签名方式为准）" class="headerlink" title="举例说明 （以此例子所示签名方式为准）"></a>举例说明 （以此例子所示签名方式为准）</h3><p>以代付接口参数为例：</p>
+<p>app_id=test</p>
+<p>app_key=123456</p>
+<p>基础签名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">baseSign = MD5( appKey + noncestr + timestamp).toUpperCase()</span><br></pre></td></tr></table></figure>
+<p>纯数据签名：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 按照 ASSCI排序请求参数：</span><br><span class="line">onlyDataSignString = agentpay_no=ds99fjjwekwerjfm&amp;app_id=test&amp;out_order_no=lJsDBB01QzGpBKOC7uaZB6D0QGZWBMCS&amp;status=1&amp;time=1517928240</span><br><span class="line"></span><br><span class="line">// 拼接appkey</span><br><span class="line">onlyDataSign = onlyDataSignString + &quot;&amp;key=123456&quot;</span><br><span class="line">// 获得数据签名</span><br><span class="line">onlySign = MD5(onlyDataSign).toUpperCase()</span><br></pre></td></tr></table></figure>
+<p>数据联合签名:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 按照 ASSCI排序请求参数：</span><br><span class="line">dataSignString = amount=1000&amp;in_open_id=xd8wjr9jr02kjf823jse94kio8&amp;notify_url=http://www.test.com/callback&amp;out_open_id=lJsDBB01QzGpBKOC7uaZB6D0QGZWBMCS&amp;out_order_no=2334234343zz&amp;title=test</span><br><span class="line">// 拼接appkey和基础签名</span><br><span class="line">dataSign = dataSignString + &quot;&amp;key=123456&quot; + &quot;&amp;basesign=&quot; + baseSign</span><br><span class="line"></span><br><span class="line">// 获得联合签名</span><br><span class="line">sign = basesign + &quot;.&quot; + MD5(dataSign).toUpperCase()</span><br></pre></td></tr></table></figure>
+<h2 id="接口基础说明"><a href="#接口基础说明" class="headerlink" title="接口基础说明"></a>接口基础说明</h2><h4 id="测试基地址-http-dev-vvchat-im"><a href="#测试基地址-http-dev-vvchat-im" class="headerlink" title="测试基地址: http://dev.vvchat.im"></a>测试基地址: <a href="http://dev.vvchat.im" target="_blank" rel="noopener">http://dev.vvchat.im</a></h4><h4 id="测试数据"><a href="#测试数据" class="headerlink" title="测试数据"></a>测试数据</h4><p>app_id: test</p>
+<p>app_key: 123456</p>
+<p>out_open_id:  lJsDBB01QzGpBKOC7uaZB6D0QGZWBMCS  // 出款账户</p>
+<h4 id="公共参数"><a href="#公共参数" class="headerlink" title="公共参数"></a>公共参数</h4><p>公用参数是在 http的header里,所有接口都需要带公共参数</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">变量名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">应用ID</td>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">应用ID由平台下发</td>
+</tr>
+<tr>
+<td style="text-align:left">随机码</td>
+<td style="text-align:left">noncestr</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">随机字符串码</td>
+</tr>
+<tr>
+<td style="text-align:left">时间戳</td>
+<td style="text-align:left">timestamp</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">时间戳 10位 到秒</td>
+</tr>
+<tr>
+<td style="text-align:left">签名</td>
+<td style="text-align:left">sign</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">签名数据</td>
+</tr>
+</tbody>
+</table>
+<h2 id="统一下单接口"><a href="#统一下单接口" class="headerlink" title="统一下单接口"></a>统一下单接口</h2><p><strong>数据签名</strong></p>
+<blockquote>
+<p>请求地址</p>
+</blockquote>
+<p>POST /paybusapi/v1/pay/unifiedorder</p>
+<blockquote>
+<p>请求参数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">变量名</th>
+<th style="text-align:left">必填</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">示例值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">应用ID</td>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">test</td>
+<td style="text-align:left">平台发放</td>
+</tr>
+<tr>
+<td style="text-align:left">店铺编号</td>
+<td style="text-align:left">store_no</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">s123</td>
+<td style="text-align:left">平台发放</td>
+</tr>
+<tr>
+<td style="text-align:left">随机字符串</td>
+<td style="text-align:left">nonce_str</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">Qdki7sdj</td>
+<td style="text-align:left">随机字符串不长于32位</td>
+</tr>
+<tr>
+<td style="text-align:left">签名</td>
+<td style="text-align:left">sign</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">C28SD98FS98DS77DF98S7DS99DF76SD</td>
+<td style="text-align:left">签名，详见签名说明</td>
+</tr>
+<tr>
+<td style="text-align:left">签名类型</td>
+<td style="text-align:left">sign_type</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">MD5</td>
+<td style="text-align:left">目前仅支持MD5</td>
+</tr>
+<tr>
+<td style="text-align:left">第三方交易编号</td>
+<td style="text-align:left">out_trade_no</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">2017928373488</td>
+<td style="text-align:left">第三方系统内部交易编码，</td>
+</tr>
+<tr>
+<td style="text-align:left">交易金额</td>
+<td style="text-align:left">amount</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">100</td>
+<td style="text-align:left">订单交易金额，单位分</td>
+</tr>
+<tr>
+<td style="text-align:left">通知地址</td>
+<td style="text-align:left">notify_url</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left"><a href="http://xxxx.com" target="_blank" rel="noopener">http://xxxx.com</a></td>
+<td style="text-align:left">异步通知地址</td>
+</tr>
+<tr>
+<td style="text-align:left">场景类型</td>
+<td style="text-align:left">scene_type</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">APP</td>
+<td style="text-align:left">场景类型,目前支持 APP</td>
+</tr>
+<tr>
+<td style="text-align:left">交易标题</td>
+<td style="text-align:left">title</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">小米电视机</td>
+<td style="text-align:left">交易标题</td>
+</tr>
+<tr>
+<td style="text-align:left">交易备注</td>
+<td style="text-align:left">remark</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">备注</td>
+<td style="text-align:left">备注</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>错误返回 400</p>
+</blockquote>
+<p>当http状态为400的时候 将会有如下数据</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">变量名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">示例值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">错误代号</td>
+<td style="text-align:left">err_code</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">400</td>
+<td style="text-align:left">400一般是指传给服务器的数据格式错误</td>
+</tr>
+<tr>
+<td style="text-align:left">错误描述</td>
+<td style="text-align:left">err_msg</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">数据格式有误！</td>
+<td style="text-align:left">错误信息描述</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>成功返回 200</p>
+</blockquote>
+<p>当http状态为200时 将会有如下数据</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">变量名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">示例值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">应用ID</td>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">test</td>
+<td style="text-align:left">调用接口提交的应用ID</td>
+</tr>
+<tr>
+<td style="text-align:left">店铺编号</td>
+<td style="text-align:left">store_no</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">s1234</td>
+<td style="text-align:left">调用接口提交的店铺编号</td>
+</tr>
+<tr>
+<td style="text-align:left">随机码</td>
+<td style="text-align:left">nonce_str</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">IDS86ZD89ZD</td>
+<td style="text-align:left">平台返回的随机码</td>
+</tr>
+<tr>
+<td style="text-align:left">场景类型</td>
+<td style="text-align:left">scene_type</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">APP</td>
+<td style="text-align:left">调用接口提交的场景类型</td>
+</tr>
+<tr>
+<td style="text-align:left">预付款编号</td>
+<td style="text-align:left">imprest_code</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">d87sd8d7f99djf98vjkdnjjdf23</td>
+<td style="text-align:left">预付款编号，后续支付的时候需要用到</td>
+</tr>
+<tr>
+<td style="text-align:left">签名</td>
+<td style="text-align:left">sign</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">zd8s7f6jdk4dnf0sj</td>
+<td style="text-align:left">平台返回的签名，用户校验返回的数据真伪性</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>通知返回</p>
+</blockquote>
+<p>第三方业务处理成功后返回 success  (不区分大小写)</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">变量名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">示例值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">应用ID</td>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">test</td>
+<td style="text-align:left">平台appid</td>
+</tr>
+<tr>
+<td style="text-align:left">交易编号</td>
+<td style="text-align:left">trade_no</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">201712023384923834</td>
+<td style="text-align:left">唯一交易编号</td>
+</tr>
+<tr>
+<td style="text-align:left">第三方交易编号</td>
+<td style="text-align:left">out_trade_no</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">xxxxxxx</td>
+<td style="text-align:left">第三方平台的交易编号</td>
+</tr>
+<tr>
+<td style="text-align:left">用户openid</td>
+<td style="text-align:left">open_id</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">xxxxxxxxxxx</td>
+<td style="text-align:left">用户唯一标示</td>
+</tr>
+<tr>
+<td style="text-align:left">交易时间</td>
+<td style="text-align:left">trade_time</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">1519631690</td>
+<td style="text-align:left">10位时间戳</td>
+</tr>
+<tr>
+<td style="text-align:left">付款时间</td>
+<td style="text-align:left">pay_time</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">1519631690</td>
+<td style="text-align:left">10位时间戳</td>
+</tr>
+<tr>
+<td style="text-align:left">交易金额</td>
+<td style="text-align:left">amount</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">100</td>
+<td style="text-align:left">单位分</td>
+</tr>
+<tr>
+<td style="text-align:left">签名</td>
+<td style="text-align:left">sign</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">xxxxxxxxxxxxxxxxxxx</td>
+<td style="text-align:left">平台返回的签名，用户校验返回的数据真伪性</td>
+</tr>
+</tbody>
+</table>
+<h2 id="查询交易信息"><a href="#查询交易信息" class="headerlink" title="查询交易信息"></a>查询交易信息</h2><p><strong>无需签名</strong></p>
+<blockquote>
+<p>请求地址</p>
+</blockquote>
+<p>GET  /paybusapi/v1/pay/unifiedorder</p>
+<blockquote>
+<p>请求参数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">作用域</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>imprest_code</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">query</td>
+<td style="text-align:right">xxxxx</td>
+<td style="text-align:right">预付款编号 imprest_code,out_trade_no二选一</td>
+</tr>
+<tr>
+<td>out_trade_no</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">query</td>
+<td style="text-align:right">xxxxx</td>
+<td style="text-align:right">第三方交易号 imprest_code,out_trade_no二选一</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>成功返回 200</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>open_id</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">eyJhbGciOiJSUzI1NiIsInR5cCI6xxxxx</td>
+<td style="text-align:right">下单用户唯一标示</td>
+</tr>
+<tr>
+<td>store_no</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">xxxx</td>
+<td style="text-align:right">店铺编号</td>
+</tr>
+<tr>
+<td>out_trade_no</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">xxxxx</td>
+<td style="text-align:right">第三方唯一编号</td>
+</tr>
+<tr>
+<td>trade_no</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">xxxx</td>
+<td style="text-align:right">平台唯一交易编号</td>
+</tr>
+<tr>
+<td>imprest_code</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">xxxx</td>
+<td style="text-align:right">预付款编号</td>
+</tr>
+<tr>
+<td>amount</td>
+<td style="text-align:center">int64</td>
+<td style="text-align:right">1000</td>
+<td style="text-align:right">交易金额，单位分</td>
+</tr>
+<tr>
+<td>title</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">xxxx</td>
+<td style="text-align:right">交易标题</td>
+</tr>
+<tr>
+<td>remark</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">xxxx</td>
+<td style="text-align:right">交易备注</td>
+</tr>
+<tr>
+<td>notify_url</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right"><a href="http://www.xxx.com" target="_blank" rel="noopener">http://www.xxx.com</a></td>
+<td style="text-align:right">回调地址</td>
+</tr>
+<tr>
+<td>scene_type</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">APP</td>
+<td style="text-align:right">场景类型 APP,WEB</td>
+</tr>
+<tr>
+<td>status</td>
+<td style="text-align:center">int</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0.待支付 1.已支付</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>错误返回 400</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>err_code</td>
+<td style="text-align:center">int</td>
+<td style="text-align:right">400</td>
+<td style="text-align:right">错误代号</td>
+</tr>
+<tr>
+<td>err_msg</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">请求失败！</td>
+<td style="text-align:right">错误信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="代付接口"><a href="#代付接口" class="headerlink" title="代付接口"></a>代付接口</h2><p><strong>联合签名</strong></p>
+<p>将代付账号的<strong>企云信</strong>余额转向指定的用户<strong>企云信</strong>账户</p>
+<blockquote>
+<p>请求地址</p>
+</blockquote>
+<p>POST /paybusapi/v1/app/agentpay</p>
+<blockquote>
+<p>请求参数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">变量名</th>
+<th style="text-align:left">必填</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">示例值</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">第三方订单号</td>
+<td style="text-align:left">out_order_no</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">201809282376</td>
+<td style="text-align:left">第三方商户系统里的订单编号</td>
+</tr>
+<tr>
+<td style="text-align:left">入款open_id</td>
+<td style="text-align:left">in_open_id</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">xd8wjr9jr02kjf823jse94kio8</td>
+<td style="text-align:left">入款open_id ，即收款人的open_id</td>
+</tr>
+<tr>
+<td style="text-align:left">出款open_id</td>
+<td style="text-align:left">out_open_id</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">lJsDBB01QzGpBKOC7uaZB6D0QGZWBMCS</td>
+<td style="text-align:left">出款open_id，即出款人的open_id，此open_id 需要跟appid绑定才有效</td>
+</tr>
+<tr>
+<td style="text-align:left">代付金额</td>
+<td style="text-align:left">amount</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">int64</td>
+<td style="text-align:left">1000</td>
+<td style="text-align:left">代付金额（单位：分）</td>
+</tr>
+<tr>
+<td style="text-align:left">通知地址</td>
+<td style="text-align:left">notify_url</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left"><a href="http://www.test.com/callback" target="_blank" rel="noopener">http://www.test.com/callback</a></td>
+<td style="text-align:left">通知地址</td>
+</tr>
+<tr>
+<td style="text-align:left">标题</td>
+<td style="text-align:left">title</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">游戏代付</td>
+<td style="text-align:left">标题</td>
+</tr>
+<tr>
+<td style="text-align:left">备注</td>
+<td style="text-align:left">remark</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">这是备注</td>
+<td style="text-align:left">备注</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>异步通知返回参数</p>
+</blockquote>
+<p>注意 ：回调可能存在重复请求情况，第三方需要做除重处理。 第三方做好返回数据的校验，防止出现恶意请求。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段名</th>
+<th style="text-align:left">变量名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">应用ID</td>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">应用ID</td>
+</tr>
+<tr>
+<td style="text-align:left">第三方订单号</td>
+<td style="text-align:left">out_order_no</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">第三方订单号</td>
+</tr>
+<tr>
+<td style="text-align:left">代付编号</td>
+<td style="text-align:left">agentpay_no</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">代付唯一编号</td>
+</tr>
+<tr>
+<td style="text-align:left">代付状态</td>
+<td style="text-align:left">status</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">0.等待代付 1.代付成功 2.代付失败</td>
+</tr>
+<tr>
+<td style="text-align:left">代付时间</td>
+<td style="text-align:left">time</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">当前UTC时间戳，从1970年1月1日0点0 分0 秒开始到现在的秒数(String)</td>
+</tr>
+<tr>
+<td style="text-align:left">签名</td>
+<td style="text-align:left">sign</td>
+<td style="text-align:left">string</td>
+<td style="text-align:left">签名数据，详见签名算法</td>
+</tr>
+</tbody>
+</table>
+<h2 id="获取访问凭证-token"><a href="#获取访问凭证-token" class="headerlink" title="获取访问凭证(token)"></a>获取访问凭证(token)</h2><p><strong>无需签名</strong></p>
+<p>获取用户调用接口的凭证，拥有此凭证后才能调用特定的接口</p>
+<p>http状态码为200 将返回成功返回的参数。http状态码为400 将返回错误返回参数</p>
+<blockquote>
+<p>请求地址</p>
+</blockquote>
+<p>GET  /userservices/v2/authorization/token?app_id=APPID&amp;app_key=APPKEY&amp;code=CODE</p>
+<blockquote>
+<p>请求参数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">作用域</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app_id</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">query</td>
+<td style="text-align:right">test</td>
+<td style="text-align:right">平台生成</td>
+</tr>
+<tr>
+<td>app_key</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">query</td>
+<td style="text-align:right">xxxxx</td>
+<td style="text-align:right">平台生成</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>成功返回 200</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>open_id</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">IqxDpc-s6S_9RaXMmag39YVH7W810Z57</td>
+<td style="text-align:right">用户唯一标示</td>
+</tr>
+<tr>
+<td>scope</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">snsapi_userinfo</td>
+<td style="text-align:right">权限</td>
+</tr>
+<tr>
+<td>token</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">eyJhbGciOiJSUzI1NiIsInR5cCI6xxxxx</td>
+<td style="text-align:right">访问凭证</td>
+</tr>
+<tr>
+<td>expire_in</td>
+<td style="text-align:center">int</td>
+<td style="text-align:right">1522821617</td>
+<td style="text-align:right">失效时间,在此时间点后token自动失效，<br>格式为10位数到秒的时间戳 int类型，类似：1522821617</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>错误返回 400</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>err_code</td>
+<td style="text-align:center">int</td>
+<td style="text-align:right">400</td>
+<td style="text-align:right">错误代号</td>
+</tr>
+<tr>
+<td>err_msg</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">请求失败！</td>
+<td style="text-align:right">错误信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="获取用户资料"><a href="#获取用户资料" class="headerlink" title="获取用户资料"></a>获取用户资料</h2><p><strong>无需签名</strong></p>
+<p>获取用户的资料，包括唯一标示，头像，昵称等等</p>
+<blockquote>
+<p>请求地址</p>
+</blockquote>
+<p>GET  /userservices/v2/authorization/userinfo</p>
+<blockquote>
+<p>请求参数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">作用域</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorization</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">header</td>
+<td style="text-align:right">eyJhbGciOiJSUzI1NiIsInR5cCI6xxxxx</td>
+<td style="text-align:right">访问凭证token </td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>成功返回 200</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>open_id</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">eyJhbGciOiJSUzI1NiIsInR5cCI6xxxxx</td>
+<td style="text-align:right">用户唯一标示</td>
+</tr>
+<tr>
+<td>nickname</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">小明</td>
+<td style="text-align:right">错误信息</td>
+</tr>
+<tr>
+<td>avatar</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right"><a href="http://xxxxx.com/avator/xxxx" target="_blank" rel="noopener">http://xxxxx.com/avator/xxxx</a></td>
+<td style="text-align:right">头像</td>
+</tr>
+<tr>
+<td>sex</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">男</td>
+<td style="text-align:right">错误信息</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>错误返回 400</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>err_code</td>
+<td style="text-align:center">int</td>
+<td style="text-align:right">400</td>
+<td style="text-align:right">错误代号</td>
+</tr>
+<tr>
+<td>err_msg</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">请求失败！</td>
+<td style="text-align:right">错误信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="发送消息"><a href="#发送消息" class="headerlink" title="发送消息"></a>发送消息</h2><p><strong>无需签名</strong></p>
+<p>可以向用户发送消息</p>
+<p>http状态码为200 将返回成功返回的参数。http状态码为400 将返回错误返回参数</p>
+<blockquote>
+<p>请求地址</p>
+</blockquote>
+<p>POST  /messageapi/v1/authorization/sendmsg</p>
+<p>Content-Type: application/json</p>
+<blockquote>
+<p>请求参数</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">作用域</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Authorization</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">header</td>
+<td style="text-align:right">eyJhbGciOiJSUzI1NiIsInR5cCI6xxxxx</td>
+<td style="text-align:right">平台生成</td>
+</tr>
+<tr>
+<td>type</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">body</td>
+<td style="text-align:right">text</td>
+<td style="text-align:right">消息类型</td>
+</tr>
+<tr>
+<td>content</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">body</td>
+<td style="text-align:right">this is msg!</td>
+<td style="text-align:right">消息内容</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>成功返回 200</p>
+</blockquote>
+<p>无需处理返回参数 判断http状态码为200 必定成功 否则失败。</p>
+<blockquote>
+<p>错误返回 400</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:right">参考值</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>err_code</td>
+<td style="text-align:center">int</td>
+<td style="text-align:right">400</td>
+<td style="text-align:right">错误代号</td>
+</tr>
+<tr>
+<td>err_msg</td>
+<td style="text-align:center">string</td>
+<td style="text-align:right">请求失败！</td>
+<td style="text-align:right">错误信息</td>
+</tr>
+</tbody>
+</table>
+
+        <div id="react-support-footer-root"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+    
+
+    <!-- js vendors -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/2.1.0/lunr.min.js"></script>
+
+    <!-- js source  -->
+    <script src="/script/doc.js"></script>
+
+    
+
+  </body>
+</html>
