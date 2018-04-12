@@ -234,5 +234,94 @@ vvchat.call("auth",{app_id:"test",scope: scope,state:STATE},function(result){
 
 参考[发送消息接口](/publicapi/index.html#发送消息)
 
+## **VVChat**基础分享
+
+***准备工作***
+
+在进行**VVChat**基础分享接入之前，在**VVChat**开放平台注册开发者帐号，并拥有一个已审核通过的应用，并获得相应的AppID和AppKey，申请**VVChat**支付且通过审核后，可开始接入流程。
+
+***基础分享流程说明***
+
+基础分享流程分三步：
+
+1. 获取基础分享的所需的数据  
+
+
+2. 获取到数据调起**VVChat**基础分享，用户确认分享后完成分享
+
+3. 调起方会收到分享结果的回调
+
+##### 第一步：请求CODE
+
+调用JSSDK的方法（JSSDK的使用说明请参考**JSSDK文档**）
+
+```
+vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url},function(result){
+
+});
+```
+
+#### 参数说明
+
+| 参数 |是否必须| 说明 |
+| :--- |:---  | :--- |
+| app_id |是| 平台发放的app_id |
+| share_title |是| 分享标题 |
+| sub_title |否| 分享副标题 |
+| share_url |是| 分享的链接 |
+| thumb_url |否| 预览图链接 |
+
+#### 返回说明
+
+| 参数 | 说明 |
+| :--- | :--- |
+| code | 分享完成后的code |
+| error | 分享完成后的error |
+
+
+
+## **VVChat**高级分享
+
+***准备工作***
+
+在进行**VVChat**高级分享接入之前，在**VVChat**开放平台注册开发者帐号，并拥有一个已审核通过的应用，并获得相应的AppID和AppKey，申请**VVChat**支付且通过审核后，可开始接入流程。
+
+***高级分享流程说明***
+
+高级分享流程分三步：
+
+1. 获取高级分享的所需的数据 
+
+2. 获取到数据调起**VVChat**高级分享方法，用户确认分享后完成分享
+
+3. 调起方会收到分享结果的回调
+
+##### 第一步：获取高级分享的所需的数据 
+
+调用JSSDK的方法（JSSDK的使用说明请参考**JSSDK文档**）
+
+```
+vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url,share_data_url:share_data_url},function(result){
+
+});
+```
+
+#### 参数说明
+
+| 参数 |是否必须| 说明 |
+| :--- |:---  | :--- |
+| app_id |是| 平台发放的app_id |
+| share_title |是| 分享标题 |
+| sub_title |否| 分享副标题 |
+| share_url |是| 分享的链接 |
+| thumb_url |否| 预览图链接 |
+| share_ data_url |否| 自定义数据内容 |
+
+#### 返回说明
+
+| 参数 | 说明 |
+| :--- | :--- |
+| code | 分享完成后的code |
+| error | 分享完成后的error |
 
 
