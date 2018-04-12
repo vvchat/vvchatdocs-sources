@@ -90,6 +90,7 @@
 </tbody>
 </table>
 <p><strong><em>注意： 基础签名不是key=value的形式 是直接拼接的值</em></strong></p>
+<p>基础签名方式如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sign = MD5( appKey + noncestr + timestamp).toUpperCase()</span><br></pre></td></tr></table></figure>
 <p><strong><em>一般安全级别的接口，可能只需要基础签名即可。</em></strong></p>
 <h2 id="数据签名"><a href="#数据签名" class="headerlink" title="数据签名"></a>数据签名</h2><p><strong><em>安全级别中等的接口，需要基础签名即可。</em></strong></p>
@@ -377,11 +378,18 @@
 <td style="text-align:left">单位分</td>
 </tr>
 <tr>
+<td style="text-align:left">交易状态</td>
+<td style="text-align:left">status</td>
+<td style="text-align:left">int</td>
+<td style="text-align:left">1</td>
+<td style="text-align:left">0.等待支付。1.支付成功  其他状态都认为错误</td>
+</tr>
+<tr>
 <td style="text-align:left">签名</td>
 <td style="text-align:left">sign</td>
 <td style="text-align:left">string</td>
 <td style="text-align:left">xxxxxxxxxxxxxxxxxxx</td>
-<td style="text-align:left">平台返回的签名，用户校验返回的数据真伪性</td>
+<td style="text-align:left">平台返回的签名，用户校验返回的数据真伪性,sign签名方式为<strong>纯数据签名</strong></td>
 </tr>
 </tbody>
 </table>
@@ -655,7 +663,7 @@
 <td style="text-align:left">签名</td>
 <td style="text-align:left">sign</td>
 <td style="text-align:left">string</td>
-<td style="text-align:left">签名数据，详见签名算法</td>
+<td style="text-align:left">签名数据，详见<strong>纯数据签名</strong></td>
 </tr>
 </tbody>
 </table>
