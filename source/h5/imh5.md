@@ -234,8 +234,8 @@ vvchat.call("auth",{app_id:"test",scope: scope,state:STATE},function(result){
 
 参考[发送消息接口](/publicapi/index.html#发送消息)
 
-## **VVChat**基础分享(分享后的内容显示的样式是固定的)
-
+## **VVChat**基础分享
+分享后的内容显示的样式是固定的
 
 ***准备工作***
 
@@ -290,7 +290,8 @@ vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,s
 | err_msg |    string   |   请求失败！ | 错误信息 |
 
 
-## **VVChat**高级分享(显示的内容是可变的)
+## **VVChat**高级分享
+显示的内容是可变的
 
 ***准备工作***
 
