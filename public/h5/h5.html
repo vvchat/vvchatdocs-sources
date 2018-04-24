@@ -162,7 +162,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="企云信基础分享"><a href="#企云信基础分享" class="headerlink" title="企云信基础分享"></a>企云信基础分享</h2><p><strong><em>准备工作</em></strong></p>
+<h2 id="企云信基础分享-分享后的内容显示的样式是固定的"><a href="#企云信基础分享-分享后的内容显示的样式是固定的" class="headerlink" title="企云信基础分享(分享后的内容显示的样式是固定的)"></a>企云信基础分享(分享后的内容显示的样式是固定的)</h2><p><strong><em>准备工作</em></strong></p>
 <p>在进行<strong>企云信</strong>基础接入之前，在<strong>企云信</strong>开放平台注册开发者帐号，并拥有一个已审核通过的应用，并获得相应的AppID和AppKey，申请<strong>企云信</strong>支付且通过审核后，可开始接入流程。</p>
 <p><strong><em>基础分享流程说明</em></strong></p>
 <p>基础分享流程分三步：</p>
@@ -216,7 +216,7 @@
 </tbody>
 </table>
 <h5 id="第二步：调起企云信基础分享"><a href="#第二步：调起企云信基础分享" class="headerlink" title="第二步：调起企云信基础分享"></a>第二步：调起<strong>企云信</strong>基础分享</h5><p>在装有<strong>企云信</strong>的手机的浏览器里打开如下链接：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qyx://qpay?app_id=APPID&amp;share_title=ShareTitle&amp;sub_title=SubTitle&amp;share_url=https://xxxxxx/&amp;thumb_url=http://xxxx/xxx&amp;notify_url =http://xxxx/xxx</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qyx://share?app_id=APPID&amp;share_title=ShareTitle&amp;sub_title=SubTitle&amp;share_url=https://xxxxxx/&amp;thumb_url=http://xxxx/xxx&amp;notify_url =http://xxxx/xxx</span><br></pre></td></tr></table></figure>
 <h5 id="第三步：调起方会收到分享结果的回调-包含回调完成的状态和信息"><a href="#第三步：调起方会收到分享结果的回调-包含回调完成的状态和信息" class="headerlink" title="第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息"></a>第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息</h5><blockquote>
 <p>成功返回 200</p>
 </blockquote>
@@ -271,7 +271,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="企云信高级分享"><a href="#企云信高级分享" class="headerlink" title="企云信高级分享"></a>企云信高级分享</h2><p><strong><em>准备工作</em></strong></p>
+<h2 id="企云信高级分享-显示的内容是可变的"><a href="#企云信高级分享-显示的内容是可变的" class="headerlink" title="企云信高级分享(显示的内容是可变的)"></a>企云信高级分享(显示的内容是可变的)</h2><p><strong><em>准备工作</em></strong></p>
 <p>在进行<strong>企云信</strong>基础接入之前，在<strong>企云信</strong>开放平台注册开发者帐号，并拥有一个已审核通过的应用，并获得相应的AppID和AppKey，申请<strong>企云信</strong>支付且通过审核后，可开始接入流程。</p>
 <p><strong><em>基础分享流程说明</em></strong></p>
 <p>高级分享流程分三步：</p>
@@ -320,7 +320,7 @@
 <tr>
 <td style="text-align:left">share_ data_url</td>
 <td style="text-align:left">否</td>
-<td style="text-align:left">自定义数据内容</td>
+<td style="text-align:left">{“tpl_header”: “vctalk”,”tpl_version”: “v1”,”tpl_type”:”MultipleLine”,”data”: [“内容1”,”内容2”]}</td>
 </tr>
 <tr>
 <td style="text-align:left">notify_url</td>
@@ -330,7 +330,7 @@
 </tbody>
 </table>
 <h5 id="第二步：调起企云信高级分享"><a href="#第二步：调起企云信高级分享" class="headerlink" title="第二步：调起企云信高级分享"></a>第二步：调起<strong>企云信</strong>高级分享</h5><p>在装有<strong>企云信</strong>的手机的浏览器里打开如下链接：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qyx://qpay?app_id=APPID&amp;share_title=ShareTitle&amp;sub_title=SubTitle&amp;share_data_url=ShareDataUrl&amp;share_url=https://xxxxxx/&amp;thumb_url=http://xxxx/xxx&amp;notify_url =http://xxxx/xxx</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qyx://share?app_id=APPID&amp;share_title=ShareTitle&amp;sub_title=SubTitle&amp;share_data_url=ShareDataUrl&amp;share_url=https://xxxxxx/&amp;thumb_url=http://xxxx/xxx&amp;notify_url =http://xxxx/xxx</span><br></pre></td></tr></table></figure>
 <h5 id="第三步：调起方会收到分享结果的回调-包含回调完成的状态和信息-1"><a href="#第三步：调起方会收到分享结果的回调-包含回调完成的状态和信息-1" class="headerlink" title="第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息"></a>第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息</h5><blockquote>
 <p>成功返回 200</p>
 </blockquote>

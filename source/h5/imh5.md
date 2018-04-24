@@ -234,7 +234,8 @@ vvchat.call("auth",{app_id:"test",scope: scope,state:STATE},function(result){
 
 参考[发送消息接口](/publicapi/index.html#发送消息)
 
-## **VVChat**基础分享
+## **VVChat**基础分享(分享后的内容显示的样式是固定的)
+
 
 ***准备工作***
 
@@ -262,14 +263,13 @@ vvchat.call("auth",{app_id:"test",scope: scope,state:STATE},function(result){
 | sub_title |否| 分享副标题 |
 | share_url |是| 分享的链接 |
 | thumb_url |否| 预览图链接 |
-| notify_url |否| 回调通知地址 |
 
 ##### 第二步：调用分享方法
 
 调用JSSDK的方法（JSSDK的使用说明请参考**JSSDK文档**）
 
 ```
-vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url, notify_url: notify_url},function(result){
+vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url},function(result){
 
 });
 ```
@@ -281,8 +281,6 @@ vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,s
 | 参数   |      类型      |  参考值 | 说明 |
 |----------|:-------------:|------:|------:|
 | code   |  int       | 200| 状态码  |
-| notify_url   |  string       | http://xxxx.com| 通知地址  |
-
 
 > 错误返回 400
 
@@ -292,7 +290,7 @@ vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,s
 | err_msg |    string   |   请求失败！ | 错误信息 |
 
 
-## **VVChat**高级分享
+## **VVChat**高级分享(显示的内容是可变的)
 
 ***准备工作***
 
@@ -318,16 +316,14 @@ vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,s
 | sub_title |否| 分享副标题 |
 | share_url |是| 分享的链接 |
 | thumb_url |否| 预览图链接 |
-| share_ data_url |否| 自定义数据内容 |
-| notify_url |否| 回调通知地址 |
-
+| share_ data_url |否 |{"tpl_header": "vctalk","tpl_version": "v1","tpl_type":"MultipleLine","data": ["内容1","内容2"]}|
 ##### 第二步：调用分享的方法
 
 
 调用JSSDK的方法（JSSDK的使用说明请参考**JSSDK文档**）
 
 ```
-vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url,share_data_url:share_data_url, notify_url: notify_url},function(result){
+vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url,share_data_url:share_data_url},function(result){
 
 });
 ```
@@ -340,7 +336,6 @@ vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,s
 | 参数   |      类型      |  参考值 | 说明 |
 |----------|:-------------:|------:|------:|
 | code   |  int       | 200| 状态码  |
-| notify_url   |  string       | http://xxxx.com| 通知地址  |
 
 
 > 错误返回 400

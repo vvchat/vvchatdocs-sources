@@ -271,7 +271,7 @@
 <h5 id="第二步：获取可以在会话里发送消息的授权码"><a href="#第二步：获取可以在会话里发送消息的授权码" class="headerlink" title="第二步：获取可以在会话里发送消息的授权码"></a>第二步：获取可以在会话里发送消息的授权码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scope= `sessionapi_sendmsg:$&#123;sessionId&#125;:$&#123;sessionType&#125;`</span><br><span class="line">vvchat.call(&quot;auth&quot;,&#123;app_id:&quot;test&quot;,scope: scope,state:STATE&#125;,function(result)&#123;</span><br><span class="line">	console.log(&quot;授权码:&quot;,result.code)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h5 id="第三步：获取访问凭证（token）"><a href="#第三步：获取访问凭证（token）" class="headerlink" title="第三步：获取访问凭证（token）"></a>第三步：获取访问凭证（token）</h5><p>参考<a href="/publicapi/index.html#获取访问凭证-token">访问凭证接口</a></p>
 <h5 id="第四步：调用发送消息接口发送消息"><a href="#第四步：调用发送消息接口发送消息" class="headerlink" title="第四步：调用发送消息接口发送消息"></a>第四步：调用发送消息接口发送消息</h5><p>参考<a href="/publicapi/index.html#发送消息">发送消息接口</a></p>
-<h2 id="VVChat基础分享"><a href="#VVChat基础分享" class="headerlink" title="VVChat基础分享"></a><strong>VVChat</strong>基础分享</h2><p><strong><em>准备工作</em></strong></p>
+<h2 id="VVChat基础分享-分享后的内容显示的样式是固定的"><a href="#VVChat基础分享-分享后的内容显示的样式是固定的" class="headerlink" title="VVChat基础分享(分享后的内容显示的样式是固定的)"></a><strong>VVChat</strong>基础分享(分享后的内容显示的样式是固定的)</h2><p><strong><em>准备工作</em></strong></p>
 <p>在进行<strong>VVChat</strong>基础分享接入之前，在<strong>VVChat</strong>开放平台注册开发者帐号，并拥有一个已审核通过的应用，并获得相应的AppID和AppKey，申请<strong>VVChat</strong>支付且通过审核后，可开始接入流程。</p>
 <p><strong><em>基础分享流程说明</em></strong></p>
 <p>基础分享流程分三步：</p>
@@ -318,15 +318,10 @@
 <td style="text-align:left">否</td>
 <td style="text-align:left">预览图链接</td>
 </tr>
-<tr>
-<td style="text-align:left">notify_url</td>
-<td style="text-align:left">否</td>
-<td style="text-align:left">回调通知地址</td>
-</tr>
 </tbody>
 </table>
 <h5 id="第二步：调用分享方法"><a href="#第二步：调用分享方法" class="headerlink" title="第二步：调用分享方法"></a>第二步：调用分享方法</h5><p>调用JSSDK的方法（JSSDK的使用说明请参考<strong>JSSDK文档</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vvchat.call(&quot;share&quot;,&#123;app_id:&quot;test&quot;,share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url, notify_url: notify_url&#125;,function(result)&#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vvchat.call(&quot;share&quot;,&#123;app_id:&quot;test&quot;,share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url&#125;,function(result)&#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h5 id="第三步：调起方会收到分享结果的回调-包含回调完成的状态和信息"><a href="#第三步：调起方会收到分享结果的回调-包含回调完成的状态和信息" class="headerlink" title="第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息"></a>第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息</h5><blockquote>
 <p>成功返回 200</p>
 </blockquote>
@@ -345,12 +340,6 @@
 <td style="text-align:center">int</td>
 <td style="text-align:right">200</td>
 <td style="text-align:right">状态码</td>
-</tr>
-<tr>
-<td>notify_url</td>
-<td style="text-align:center">string</td>
-<td style="text-align:right"><a href="http://xxxx.com" target="_blank" rel="noopener">http://xxxx.com</a></td>
-<td style="text-align:right">通知地址</td>
 </tr>
 </tbody>
 </table>
@@ -381,7 +370,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="VVChat高级分享"><a href="#VVChat高级分享" class="headerlink" title="VVChat高级分享"></a><strong>VVChat</strong>高级分享</h2><p><strong><em>准备工作</em></strong></p>
+<h2 id="VVChat高级分享-显示的内容是可变的"><a href="#VVChat高级分享-显示的内容是可变的" class="headerlink" title="VVChat高级分享(显示的内容是可变的)"></a><strong>VVChat</strong>高级分享(显示的内容是可变的)</h2><p><strong><em>准备工作</em></strong></p>
 <p>在进行<strong>VVChat</strong>高级分享接入之前，在<strong>VVChat</strong>开放平台注册开发者帐号，并拥有一个已审核通过的应用，并获得相应的AppID和AppKey，申请<strong>VVChat</strong>支付且通过审核后，可开始接入流程。</p>
 <p><strong><em>高级分享流程说明</em></strong></p>
 <p>高级分享流程分三步：</p>
@@ -430,17 +419,12 @@
 <tr>
 <td style="text-align:left">share_ data_url</td>
 <td style="text-align:left">否</td>
-<td style="text-align:left">自定义数据内容</td>
-</tr>
-<tr>
-<td style="text-align:left">notify_url</td>
-<td style="text-align:left">否</td>
-<td style="text-align:left">回调通知地址</td>
+<td style="text-align:left">{“tpl_header”: “vctalk”,”tpl_version”: “v1”,”tpl_type”:”MultipleLine”,”data”: [“内容1”,”内容2”]}</td>
 </tr>
 </tbody>
 </table>
 <h5 id="第二步：调用分享的方法"><a href="#第二步：调用分享的方法" class="headerlink" title="第二步：调用分享的方法"></a>第二步：调用分享的方法</h5><p>调用JSSDK的方法（JSSDK的使用说明请参考<strong>JSSDK文档</strong>）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vvchat.call(&quot;share&quot;,&#123;app_id:&quot;test&quot;,share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url,share_data_url:share_data_url, notify_url: notify_url&#125;,function(result)&#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vvchat.call(&quot;share&quot;,&#123;app_id:&quot;test&quot;,share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url,share_data_url:share_data_url&#125;,function(result)&#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h5 id="第三步：调起方会收到分享结果的回调-包含回调完成的状态和信息-1"><a href="#第三步：调起方会收到分享结果的回调-包含回调完成的状态和信息-1" class="headerlink" title="第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息"></a>第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息</h5><h4 id="返回说明-3"><a href="#返回说明-3" class="headerlink" title="返回说明"></a>返回说明</h4><blockquote>
 <p>成功返回 200</p>
 </blockquote>
@@ -459,12 +443,6 @@
 <td style="text-align:center">int</td>
 <td style="text-align:right">200</td>
 <td style="text-align:right">状态码</td>
-</tr>
-<tr>
-<td>notify_url</td>
-<td style="text-align:center">string</td>
-<td style="text-align:right"><a href="http://xxxx.com" target="_blank" rel="noopener">http://xxxx.com</a></td>
-<td style="text-align:right">通知地址</td>
 </tr>
 </tbody>
 </table>
