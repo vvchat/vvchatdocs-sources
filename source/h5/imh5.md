@@ -235,6 +235,7 @@ vvchat.call("auth",{app_id:"test",scope: scope,state:STATE},function(result){
 参考[发送消息接口](/publicapi/index.html#发送消息)
 
 ## **VVChat**基础分享
+分享后的内容显示的样式是固定的
 
 ***准备工作***
 
@@ -251,17 +252,9 @@ vvchat.call("auth",{app_id:"test",scope: scope,state:STATE},function(result){
 
 3. 调起方会收到分享结果的回调
 
-##### 第一步：请求CODE
+##### 第一步：获取分享内容
 
-调用JSSDK的方法（JSSDK的使用说明请参考**JSSDK文档**）
-
-```
-vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url},function(result){
-
-});
-```
-
-#### 参数说明
+###### 参数说明
 
 | 参数 |是否必须| 说明 |
 | :--- |:---  | :--- |
@@ -271,16 +264,34 @@ vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,s
 | share_url |是| 分享的链接 |
 | thumb_url |否| 预览图链接 |
 
-#### 返回说明
+##### 第二步：调用分享方法
 
-| 参数 | 说明 |
-| :--- | :--- |
-| code | 分享完成后的code |
-| error | 分享完成后的error |
+调用JSSDK的方法（JSSDK的使用说明请参考**JSSDK文档**）
 
+```
+vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url},function(result){
+
+});
+```
+
+##### 第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息
+
+> 成功返回 200
+
+| 参数   |      类型      |  参考值 | 说明 |
+|----------|:-------------:|------:|------:|
+| code   |  int       | 200| 状态码  |
+
+> 错误返回 400
+
+| 参数   |      类型      |  参考值 | 说明 |
+|----------|:-------------:|------:|------:|
+| code   |  int       | 400| 错误代号  |
+| err_msg |    string   |   请求失败！ | 错误信息 |
 
 
 ## **VVChat**高级分享
+显示的内容是可变的
 
 ***准备工作***
 
@@ -297,6 +308,18 @@ vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,s
 3. 调起方会收到分享结果的回调
 
 ##### 第一步：获取高级分享的所需的数据 
+######  参数说明
+
+| 参数 |是否必须| 说明 |
+| :--- |:---  | :--- |
+| app_id |是| 平台发放的app_id |
+| share_title |是| 分享标题 |
+| sub_title |否| 分享副标题 |
+| share_url |是| 分享的链接 |
+| thumb_url |否| 预览图链接 |
+| share_ data_url |否 |{"tpl_header": "vctalk","tpl_version": "v1","tpl_type":"MultipleLine","data": ["内容1","内容2"]}|
+##### 第二步：调用分享的方法
+
 
 调用JSSDK的方法（JSSDK的使用说明请参考**JSSDK文档**）
 
@@ -306,22 +329,21 @@ vvchat.call("share",{app_id:"test",share_title:share_title,sub_title:sub_title,s
 });
 ```
 
-#### 参数说明
-
-| 参数 |是否必须| 说明 |
-| :--- |:---  | :--- |
-| app_id |是| 平台发放的app_id |
-| share_title |是| 分享标题 |
-| sub_title |否| 分享副标题 |
-| share_url |是| 分享的链接 |
-| thumb_url |否| 预览图链接 |
-| share_ data_url |否| 自定义数据内容 |
-
+##### 第三步：调起方会收到分享结果的回调 包含回调完成的状态和信息
 #### 返回说明
 
-| 参数 | 说明 |
-| :--- | :--- |
-| code | 分享完成后的code |
-| error | 分享完成后的error |
+> 成功返回 200
+
+| 参数   |      类型      |  参考值 | 说明 |
+|----------|:-------------:|------:|------:|
+| code   |  int       | 200| 状态码  |
+
+
+> 错误返回 400
+
+| 参数   |      类型      |  参考值 | 说明 |
+|----------|:-------------:|------:|------:|
+| code   |  int       | 400| 错误代号  |
+| err_msg |    string   |   请求失败！ | 错误信息 |
 
 
