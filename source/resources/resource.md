@@ -1,6 +1,10 @@
 title: VVChat文档
 ---
 
+## Android VCtalk 测试版本
+
+[下载VCtalk测试版本](http://file.vvchat.im/files/VCtalk_latest_test.apk)
+
 ## JSSDK Demo
 
 **文档内容**

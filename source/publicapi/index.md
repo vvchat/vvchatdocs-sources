@@ -227,6 +227,7 @@ GET  /paybusapi/v1/pay/unifiedorder
 |----------|:-------------:|------:|------:|------:|
 | imprest_code   |  string       | query|xxxxx| 预付款编号 imprest_code,out_trade_no二选一
 | out_trade_no   |  string       | query|xxxxx| 第三方交易号 imprest_code,out_trade_no二选一
+| app_id   |  string       | query|xxxxx| app_id
 
 > 成功返回 200
 

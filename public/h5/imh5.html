@@ -271,6 +271,148 @@
 <h5 id="第二步：获取可以在会话里发送消息的授权码"><a href="#第二步：获取可以在会话里发送消息的授权码" class="headerlink" title="第二步：获取可以在会话里发送消息的授权码"></a>第二步：获取可以在会话里发送消息的授权码</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scope= `sessionapi_sendmsg:$&#123;sessionId&#125;:$&#123;sessionType&#125;`</span><br><span class="line">vvchat.call(&quot;auth&quot;,&#123;app_id:&quot;test&quot;,scope: scope,state:STATE&#125;,function(result)&#123;</span><br><span class="line">	console.log(&quot;授权码:&quot;,result.code)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h5 id="第三步：获取访问凭证（token）"><a href="#第三步：获取访问凭证（token）" class="headerlink" title="第三步：获取访问凭证（token）"></a>第三步：获取访问凭证（token）</h5><p>参考<a href="/publicapi/index.html#获取访问凭证-token">访问凭证接口</a></p>
 <h5 id="第四步：调用发送消息接口发送消息"><a href="#第四步：调用发送消息接口发送消息" class="headerlink" title="第四步：调用发送消息接口发送消息"></a>第四步：调用发送消息接口发送消息</h5><p>参考<a href="/publicapi/index.html#发送消息">发送消息接口</a></p>
+<h2 id="VVChat基础分享"><a href="#VVChat基础分享" class="headerlink" title="VVChat基础分享"></a><strong>VVChat</strong>基础分享</h2><p><strong><em>准备工作</em></strong></p>
+<p>在进行<strong>VVChat</strong>基础分享接入之前，在<strong>VVChat</strong>开放平台注册开发者帐号，并拥有一个已审核通过的应用，并获得相应的AppID和AppKey，申请<strong>VVChat</strong>支付且通过审核后，可开始接入流程。</p>
+<p><strong><em>基础分享流程说明</em></strong></p>
+<p>基础分享流程分三步：</p>
+<ol>
+<li>获取基础分享的所需的数据  </li>
+</ol>
+<ol start="2">
+<li><p>获取到数据调起<strong>VVChat</strong>基础分享，用户确认分享后完成分享</p>
+</li>
+<li><p>调起方会收到分享结果的回调</p>
+</li>
+</ol>
+<h5 id="第一步：请求CODE-1"><a href="#第一步：请求CODE-1" class="headerlink" title="第一步：请求CODE"></a>第一步：请求CODE</h5><p>调用JSSDK的方法（JSSDK的使用说明请参考<strong>JSSDK文档</strong>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vvchat.call(&quot;share&quot;,&#123;app_id:&quot;test&quot;,share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url&#125;,function(result)&#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="参数说明-3"><a href="#参数说明-3" class="headerlink" title="参数说明"></a>参数说明</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">是否必须</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">平台发放的app_id</td>
+</tr>
+<tr>
+<td style="text-align:left">share_title</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">分享标题</td>
+</tr>
+<tr>
+<td style="text-align:left">sub_title</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">分享副标题</td>
+</tr>
+<tr>
+<td style="text-align:left">share_url</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">分享的链接</td>
+</tr>
+<tr>
+<td style="text-align:left">thumb_url</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">预览图链接</td>
+</tr>
+</tbody>
+</table>
+<h4 id="返回说明-3"><a href="#返回说明-3" class="headerlink" title="返回说明"></a>返回说明</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">code</td>
+<td style="text-align:left">分享完成后的code</td>
+</tr>
+<tr>
+<td style="text-align:left">error</td>
+<td style="text-align:left">分享完成后的error</td>
+</tr>
+</tbody>
+</table>
+<h2 id="VVChat高级分享"><a href="#VVChat高级分享" class="headerlink" title="VVChat高级分享"></a><strong>VVChat</strong>高级分享</h2><p><strong><em>准备工作</em></strong></p>
+<p>在进行<strong>VVChat</strong>高级分享接入之前，在<strong>VVChat</strong>开放平台注册开发者帐号，并拥有一个已审核通过的应用，并获得相应的AppID和AppKey，申请<strong>VVChat</strong>支付且通过审核后，可开始接入流程。</p>
+<p><strong><em>高级分享流程说明</em></strong></p>
+<p>高级分享流程分三步：</p>
+<ol>
+<li><p>获取高级分享的所需的数据 </p>
+</li>
+<li><p>获取到数据调起<strong>VVChat</strong>高级分享方法，用户确认分享后完成分享</p>
+</li>
+<li><p>调起方会收到分享结果的回调</p>
+</li>
+</ol>
+<h5 id="第一步：获取高级分享的所需的数据"><a href="#第一步：获取高级分享的所需的数据" class="headerlink" title="第一步：获取高级分享的所需的数据"></a>第一步：获取高级分享的所需的数据</h5><p>调用JSSDK的方法（JSSDK的使用说明请参考<strong>JSSDK文档</strong>）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vvchat.call(&quot;share&quot;,&#123;app_id:&quot;test&quot;,share_title:share_title,sub_title:sub_title,share_url:share_url,thumb_url:thumb_url,share_data_url:share_data_url&#125;,function(result)&#123;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="参数说明-4"><a href="#参数说明-4" class="headerlink" title="参数说明"></a>参数说明</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">是否必须</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">app_id</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">平台发放的app_id</td>
+</tr>
+<tr>
+<td style="text-align:left">share_title</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">分享标题</td>
+</tr>
+<tr>
+<td style="text-align:left">sub_title</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">分享副标题</td>
+</tr>
+<tr>
+<td style="text-align:left">share_url</td>
+<td style="text-align:left">是</td>
+<td style="text-align:left">分享的链接</td>
+</tr>
+<tr>
+<td style="text-align:left">thumb_url</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">预览图链接</td>
+</tr>
+<tr>
+<td style="text-align:left">share_ data_url</td>
+<td style="text-align:left">否</td>
+<td style="text-align:left">自定义数据内容</td>
+</tr>
+</tbody>
+</table>
+<h4 id="返回说明-4"><a href="#返回说明-4" class="headerlink" title="返回说明"></a>返回说明</h4><table>
+<thead>
+<tr>
+<th style="text-align:left">参数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">code</td>
+<td style="text-align:left">分享完成后的code</td>
+</tr>
+<tr>
+<td style="text-align:left">error</td>
+<td style="text-align:left">分享完成后的error</td>
+</tr>
+</tbody>
+</table>
 
         <div id="react-support-footer-root"></div>
       </div>
