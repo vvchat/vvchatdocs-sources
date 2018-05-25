@@ -13,7 +13,7 @@ SDK for Javascript
 
 JSSDK 使用实例
 
-[下载JSDDK Demo](/download/jssdk-1.0.0.zip)
+[下载JSDDK Demo](/download/VVChat-JSSDK.zip)
 
 
 ## iOS Demo

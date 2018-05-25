@@ -40,6 +40,26 @@
     }]
   },
   {
+    "text": "机器人",
+    "type": "label",
+    "children": [{
+       "text": "流程说明",
+      "type": "link",
+      "path": "robot/shuoming.html"
+      },
+      {
+       "text": "事件说明",
+      "type": "link",
+      "path": "robot/event.html"
+      },
+      {
+       "text": "指令控制",
+      "type": "link",
+      "path": "robot/controller.html"
+      },
+    ]
+  },
+  {
     "text": "服务端",
     "type": "label",
     "children":[
