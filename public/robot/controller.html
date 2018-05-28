@@ -33,7 +33,14 @@
       <div id="react-search-results-root"></div>
       <div id="page-content" class="doc-formatting">
         <p><strong>VVChat</strong></p>
-<h2 id="机器人控制指令说明"><a href="#机器人控制指令说明" class="headerlink" title="机器人控制指令说明"></a>机器人控制指令说明</h2><p>通过这个接口可以给机器人下发指令</p>
+<h2 id="获取访问token"><a href="#获取访问token" class="headerlink" title="获取访问token"></a>获取访问token</h2><p>下发指令需要先获取token，有效期一般为7200s秒 在没过期之前请做好缓存，不要频繁请求。</p>
+<blockquote>
+<p>请求地址</p>
+</blockquote>
+<p>GET /robotapi/v1/token?app_id=xxx&amp;app_key=xxxx</p>
+<p>返回格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;token&quot;: &quot;xxxxx&quot;,</span><br><span class="line">	&quot;expire_in&quot;: 7200</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过这个接口可以给机器人下发指令</p>
 <blockquote>
 <p>请求地址</p>
 </blockquote>

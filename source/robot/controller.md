@@ -2,7 +2,8 @@ title: VVChat开放平台文档
 ---
 **VVChat**
 
-## 机器人控制指令说明
+
+## 获取访问token
 
 下发指令需要先获取token，有效期一般为7200s秒 在没过期之前请做好缓存，不要频繁请求。
 
@@ -20,12 +21,12 @@ GET /robotapi/v1/token?app_id=xxx&app_key=xxxx
 }
 ```
 
-
+## 下发机器人指令接口
 通过这个接口可以给机器人下发指令
 
 > 请求地址
 
-POST /robotapi/v1/message/send
+POST /robotapi/v1/message/send?robot_no=xxx&token=xxx
 
 请求格式：
 
@@ -59,7 +60,7 @@ content:
 	
 >params：指令参数
 
-#### 指令集说明
+## 指令集说明
 
 ## send-text （发送文本消息）
 
