@@ -4,6 +4,23 @@ title: VVChat开放平台文档
 
 ## 机器人控制指令说明
 
+下发指令需要先获取token，有效期一般为7200s秒 在没过期之前请做好缓存，不要频繁请求。
+
+
+> 请求地址
+
+GET /robotapi/v1/token?app_id=xxx&app_key=xxxx
+
+返回格式：
+
+```
+{
+	"token": "xxxxx",
+	"expire_in": 7200
+}
+```
+
+
 通过这个接口可以给机器人下发指令
 
 > 请求地址

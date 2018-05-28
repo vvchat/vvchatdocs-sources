@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <title>VVChat开放平台 | VVChat开放平台文档 </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+
+    <!-- fonts -->
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Ubuntu:300,400,500,600,700" rel="stylesheet">
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/style/doc.css">
+
+    <!-- favicon -->
+    <link rel="icon" href="/favicon.ico">
+
+    
+
+  </head>
+  <body>
+
+   <script>window.__INITIAL_STATE__ = {"page":{"title":"VVChat开放平台文档","path":"robot/event.html"},"data":{"navigation":{"logo":{"text":"VVChat开放平台","type":"link","path":"index.html"},"main":[{"text":"H5应用","type":"label","children":[{"text":"IM内H5","type":"link","path":"h5/imh5.html"},{"text":"手机H5","type":"link","path":"h5/h5.html"},{"text":"JSSDK文档","type":"link","path":"jssdk/jssdk.html"}]},{"text":"移动APP","type":"label","children":[{"text":"用户信息授权","type":"link","path":"appsdk/auth.html"},{"text":"APP支付","type":"link","path":"appsdk/pay.html"},{"text":"客服","type":"link","path":"appsdk/service.html"}]},{"text":"机器人","type":"label","children":[{"text":"流程说明","type":"link","path":"robot/shuoming.html"},{"text":"事件说明","type":"link","path":"robot/event.html"},{"text":"指令控制","type":"link","path":"robot/controller.html"}]},{"text":"服务端","type":"label","children":[{"text":"API","type":"link","path":"publicapi/index.html"}]},{"text":"资源下载","type":"label","children":[{"text":"资源","type":"link","path":"resources/resource.html"}]}]}},"config":{"timezone":null,"root":"/","time_format":"HH:mm:ss","theme":"../node_modules/hexo-theme-doc","theme_config":{"swagger_ui":{"version":2,"permalinks":true,"api_explorer":true,"download":"Download specification","show_extensions":false,"deep_linking":true,"display_operation_id":false,"doc_expansion":"none"},"search":{"skip":false,"background":false,"route":"/lunr.json"},"favicon":"/favicon.ico"}}}</script>
+
+    <div id="react-navigation-root"><div class="doc-navigation" data-reactroot=""><nav class="doc-navbar"><a href="/index.html" class="doc-navbar__logo"><img src="/images/logo.png" class="doc-navbar__logo__img"/><span class="doc-navbar__logo__text">VVChat开放平台</span></a><i class="dc-icon dc-icon--close dc-icon--interactive doc-sidebar-close doc-navbar__sidebar-close doc-navbar__sidebar-close--desktop"></i><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-navbar__sidebar-toggle"></i></nav><nav class="doc-sidebar"><div class="doc-sidebar__vertical-menu"><i class="dc-icon dc-icon--menu dc-icon--interactive doc-sidebar-toggle doc-sidebar-toggle--primary doc-sidebar__vertical-menu__item"></i><i class="dc-icon dc-icon--search dc-icon--interactive doc-sidebar__vertical-menu__item doc-sidebar__vertical-menu__item--primary"></i></div><div class="doc-sidebar-content"><div class="doc-sidebar__search-form"></div><ul class="doc-sidebar-list"></ul></div></nav></div></div>
+    <div class="doc-content">
+  <div class="dc-page">
+    <div class="dc-card">
+      <div id="react-search-results-root"></div>
+      <div id="page-content" class="doc-formatting">
+        <p><strong>VVChat</strong></p>
+<h2 id="事件结构"><a href="#事件结构" class="headerlink" title="事件结构"></a>事件结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;event&quot;: &quot;join-group-for-invite&quot;,</span><br><span class="line">	&quot;version&quot;: &quot;v1&quot;,</span><br><span class="line">	&quot;data&quot;: &#123;</span><br><span class="line">		&quot;robot&quot;: &#123;</span><br><span class="line">			&quot;app_id&quot;: &quot;qiyunxin&quot;,</span><br><span class="line">			&quot;open_id&quot;: &quot;CWYlCXOccx73NnVGntzatmSLEzgoFMTO&quot;,</span><br><span class="line">			&quot;robot_no&quot;: &quot;xds3345&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;session&quot;: &#123;</span><br><span class="line">			&quot;session_open_id&quot;: &quot;hwWj3RPotzas_nQwGHTqwB0KnUy8hLBp&quot;,</span><br><span class="line">			&quot;session_type&quot;: &quot;2&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;trigger&quot;: &#123;</span><br><span class="line">			&quot;open_id&quot;: &quot;CWYlCXOccx73NnVGntzatmSLEzgoFMTO&quot;,</span><br><span class="line">			&quot;target&quot;: &quot;user&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>event: 事件名称</p>
+<p>version: 事件版本</p>
+<p>data：事件数据</p>
+<pre><code>robot：为机器人信息
+    app_id: 机器人绑定的app_id
+    open_id： 机器人绑定的open_id
+    robot_no：机器人的唯一编号
+
+session: 触发事件的会话信息（群或个人）
+  session_type: 会话类型 1. 单聊 2. 群聊
+  session_open_id: 会话open_id 如果是个人就是个人的open_id 如果是群组就是群的open_id
+
+trigger: 触发事件的对象
+  target: 目标类型 user：为用户
+  open_id： 如果target=user open_id即为个人open_id  
+</code></pre><h2 id="session-open"><a href="#session-open" class="headerlink" title="session-open"></a>session-open</h2><p>用户打开了机器人所在的群的会话</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;event&quot;: &quot;session-open&quot;,</span><br><span class="line">	&quot;version&quot;: &quot;v1&quot;,</span><br><span class="line">	&quot;data&quot;: &#123;</span><br><span class="line">		&quot;robot&quot;: &#123;</span><br><span class="line">			&quot;app_id&quot;: &quot;qiyunxin&quot;,</span><br><span class="line">			&quot;open_id&quot;: &quot;CWYlCXOccx73NnVGntzatmSLEzgoFMTO&quot;,</span><br><span class="line">			&quot;robot_no&quot;: &quot;xds3345&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;session&quot;: &#123;</span><br><span class="line">			&quot;session_open_id&quot;: &quot;hwWj3RPotzas_nQwGHTqwB0KnUy8hLBp&quot;,</span><br><span class="line">			&quot;session_type&quot;: &quot;2&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;trigger&quot;: &#123;</span><br><span class="line">			&quot;open_id&quot;: &quot;CWYlCXOccx73NnVGntzatmSLEzgoFMTO&quot;,</span><br><span class="line">			&quot;target&quot;: &quot;user&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="join-group-for-invite"><a href="#join-group-for-invite" class="headerlink" title="join-group-for-invite"></a>join-group-for-invite</h2><p>机器人被拉入群</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;event&quot;: &quot;join-group-for-invite&quot;,</span><br><span class="line">	&quot;version&quot;: &quot;v1&quot;,</span><br><span class="line">	&quot;data&quot;: &#123;</span><br><span class="line">		&quot;robot&quot;: &#123;</span><br><span class="line">			&quot;app_id&quot;: &quot;qiyunxin&quot;,</span><br><span class="line">			&quot;open_id&quot;: &quot;CWYlCXOccx73NnVGntzatmSLEzgoFMTO&quot;,</span><br><span class="line">			&quot;robot_no&quot;: &quot;xds3345&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;session&quot;: &#123;</span><br><span class="line">			&quot;session_open_id&quot;: &quot;hwWj3RPotzas_nQwGHTqwB0KnUy8hLBp&quot;,</span><br><span class="line">			&quot;session_type&quot;: &quot;2&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;trigger&quot;: &#123;</span><br><span class="line">			&quot;open_id&quot;: &quot;CWYlCXOccx73NnVGntzatmSLEzgoFMTO&quot;,</span><br><span class="line">			&quot;target&quot;: &quot;user&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="at"><a href="#at" class="headerlink" title="at (@)"></a>at (@)</h2><p>机器人被AT(@)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;event&quot;: &quot;at&quot;,</span><br><span class="line">	&quot;version&quot;: &quot;v1&quot;,</span><br><span class="line">	&quot;data&quot;: &#123;</span><br><span class="line">		&quot;content&quot;: &#123;</span><br><span class="line">			&quot;text&quot;: &quot;您好&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;robot&quot;: &#123;</span><br><span class="line">			&quot;app_id&quot;: &quot;test&quot;,</span><br><span class="line">			&quot;open_id&quot;: &quot;lJsDBB01QzGpBKOC7uaZB6D0QGZWBMCS&quot;,</span><br><span class="line">			&quot;robot_no&quot;: &quot;xds2323&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;session&quot;: &#123;</span><br><span class="line">			&quot;session_open_id&quot;: &quot;8g8ZW-JHWSNvTvMCu9V9uF58NaIjmjy2&quot;,</span><br><span class="line">			&quot;session_type&quot;: &quot;2&quot;</span><br><span class="line">		&#125;,</span><br><span class="line">		&quot;trigger&quot;: &#123;</span><br><span class="line">			&quot;open_id&quot;: &quot;T8UDxMFSYBeU-N4jCCy0PIYk7KavHYnU&quot;,</span><br><span class="line">			&quot;target&quot;: &quot;user&quot;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>content-&gt;text: 为用户at所发的消息</p>
+
+        <div id="react-support-footer-root"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+
+    
+
+    <!-- js vendors -->
+    <script src="//code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lunr.js/2.1.0/lunr.min.js"></script>
+
+    <!-- js source  -->
+    <script src="/script/doc.js"></script>
+
+    
+
+  </body>
+</html>
