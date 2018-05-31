@@ -40,11 +40,11 @@
 <p>GET /robotapi/v1/token?app_id=xxx&amp;app_key=xxxx</p>
 <p>返回格式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;token&quot;: &quot;xxxxx&quot;,</span><br><span class="line">	&quot;expire_in&quot;: 7200</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>通过这个接口可以给机器人下发指令</p>
+<h2 id="下发机器人指令接口"><a href="#下发机器人指令接口" class="headerlink" title="下发机器人指令接口"></a>下发机器人指令接口</h2><p>通过这个接口可以给机器人下发指令</p>
 <blockquote>
 <p>请求地址</p>
 </blockquote>
-<p>POST /robotapi/v1/message/send</p>
+<p>POST /robotapi/v1/message/send?robot_no=xxx&amp;token=xxx</p>
 <p>请求格式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;type&quot;: &quot;cmd&quot;,</span><br><span class="line">	&quot;session_open_id&quot;: &quot;xxxxx&quot;,</span><br><span class="line">	&quot;session_type&quot;: &quot;2&quot;,</span><br><span class="line">	&quot;to_type&quot;: &quot;2&quot;,</span><br><span class="line">	&quot;to&quot;: &quot;8g8ZW-JHWSNvTvMCu9V9uF58NaIjmjy2&quot;,</span><br><span class="line">	&quot;content&quot;: &#123;</span><br><span class="line">		&quot;cmd&quot;: &quot;webview-group-open&quot;,</span><br><span class="line">		&quot;params&quot;: &quot;&#123;\&quot;height\&quot;:\&quot;50%\&quot;,\&quot;url\&quot;:\&quot;\&quot;&#125;&quot;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>type: 固定为cmd</p>
@@ -59,7 +59,7 @@
 <blockquote>
 <p>params：指令参数</p>
 </blockquote>
-<h4 id="指令集说明"><a href="#指令集说明" class="headerlink" title="指令集说明"></a>指令集说明</h4><h2 id="send-text-（发送文本消息）"><a href="#send-text-（发送文本消息）" class="headerlink" title="send-text （发送文本消息）"></a>send-text （发送文本消息）</h2><p>cmd: send-text</p>
+<h2 id="指令集说明"><a href="#指令集说明" class="headerlink" title="指令集说明"></a>指令集说明</h2><h2 id="send-text-（发送文本消息）"><a href="#send-text-（发送文本消息）" class="headerlink" title="send-text （发送文本消息）"></a>send-text （发送文本消息）</h2><p>cmd: send-text</p>
 <p>params:</p>
 <blockquote>
 <p>text: 文本消息内容</p>
