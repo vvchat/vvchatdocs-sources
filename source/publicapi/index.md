@@ -71,7 +71,7 @@ sign = MD5( appKey + noncestr + timestamp).toUpperCase()
 
 ## 数据签名
 
-***安全级别中等的接口，需要基础签名即可。***
+***安全级别中等的接口，只需要数据签名即可。***
 
 数据签名规则与通用签名规则一致,签名的数据为接口请求数据
 
@@ -103,6 +103,8 @@ sign = basesign+"." + dataAndBaseSign  //基础签名 + "." + 数据基础混合
 app\_id=test
 
 app\_key=123456
+
+store_no=s1234
 
 基础签名：
 
@@ -138,6 +140,8 @@ onlySign = MD5(onlyDataSign).toUpperCase()
 
 ## 接口基础说明
 
+所有接口都是以JSON的形式传参数。Content-Type：application/json
+
 #### 测试基地址: http://dev.vvchat.im
 
 #### 测试数据
@@ -152,7 +156,7 @@ out\_open\_id:  lJsDBB01QzGpBKOC7uaZB6D0QGZWBMCS  // 出款账户
 
 ## 统一下单接口
 
-**数据签名**
+此接口采用 **数据签名** 方式
 
 > 请求地址
 
@@ -164,7 +168,7 @@ POST /paybusapi/v1/pay/unifiedorder
 | 字段名 | 变量名 | 必填 | 类型 | 示例值 | 描述 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 应用ID | app\_id | 是 | string | test | 平台发放 |
-| 店铺编号 | store\_no | 是 | string | s123 | 平台发放 |
+| 店铺编号 | store\_no | 是 | string | s1234 | 平台发放 |
 | 随机字符串 | nonce\_str | 是 | string | Qdki7sdj | 随机字符串不长于32位 |
 | 签名 | sign | 是 | string | C28SD98FS98DS77DF98S7DS99DF76SD | 签名，详见签名说明 |
 | 签名类型 | sign\_type | 是 | string | MD5 | 目前仅支持MD5 |
